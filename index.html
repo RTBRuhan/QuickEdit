@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Edit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <input type="file" id="image-input" accept="image/*" style="display: none;">
+    <div class="app-container">
+        <div class="toolbar">
+            <!-- Tools will be dynamically populated by JS -->
+            <button class="tool-btn" data-tool="select" title="Select & Move (S)"><span class="material-symbols-outlined">pan_tool</span></button>
+            <button class="tool-btn" data-tool="crop" title="Crop (C)"><span class="material-symbols-outlined">crop</span></button>
+            <div class="divider"></div>
+            <button class="tool-btn" data-tool="text" title="Text (T)"><span class="material-symbols-outlined">title</span></button>
+            <div class="shape-selector">
+                <button class="tool-btn shape-btn" data-tool="rect" title="Shapes (R)">
+                    <span class="material-symbols-outlined">crop_din</span>
+                    <span class="shape-arrow">▼</span>
+                </button>
+                <div class="shape-menu" id="shape-menu">
+                    <button data-shape="rect" title="Rectangle"><span class="material-symbols-outlined">crop_din</span></button>
+                    <button data-shape="circle" title="Circle"><span class="material-symbols-outlined">circle</span></button>
+                    <button data-shape="check" title="Checkmark"><span class="material-symbols-outlined">check</span></button>
+                    <button data-shape="cross" title="Cross"><span class="material-symbols-outlined">close</span></button>
+                </div>
+            </div>
+            <button class="tool-btn" data-tool="arrow" title="Arrow (A)"><span class="material-symbols-outlined">arrow_forward</span></button>
+            <button class="tool-btn" data-tool="brush" title="Brush (U)"><span class="material-symbols-outlined">brush</span></button>
+            <button class="tool-btn" data-tool="numbers" title="Numbered Steps (N)"><span class="material-symbols-outlined">format_list_numbered</span></button>
+            <button class="tool-btn" data-tool="blur" title="Blur (B)"><span class="material-symbols-outlined">blur_on</span></button>
+            <button class="tool-btn" data-tool="eraser" title="Eraser (E)"><span class="material-symbols-outlined">ink_eraser</span></button>
+            
+            <div class="tool-options" id="tool-options">
+                <input type="color" id="color-picker" value="#ff0000" title="Color Picker">
+                <div class="input-group" id="size-options">
+                    <label>Size:</label>
+                    <input type="number" id="line-width-number" min="1" max="100" value="10">
+                    <input type="range" id="line-width" min="1" max="100" value="10" title="Size / Thickness">
+                </div>
+                
+                <!-- Text-specific options -->
+                <div class="text-options" id="text-options" style="display: none;">
+                    <div class="input-group">
+                        <label>Font:</label>
+                        <select id="font-family">
+                            <option value="Arial">Arial</option>
+                            <option value="Roboto">Roboto</option>
+                            <option value="Open Sans">Open Sans</option>
+                            <option value="Lato">Lato</option>
+                            <option value="Montserrat">Montserrat</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Font Size:</label>
+                        <input type="number" id="font-size" min="8" max="200" value="20">
+                    </div>
+                    <div class="text-formatting">
+                        <button type="button" id="bold-btn" class="format-btn" title="Bold">B</button>
+                        <button type="button" id="italic-btn" class="format-btn" title="Italic">I</button>
+                        <button type="button" id="underline-btn" class="format-btn" title="Underline">U</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spacer"></div>
+            <button class="tool-btn" id="help-btn" title="Help & Shortcuts (?)"><span class="material-symbols-outlined">help</span></button>
+            <div class="divider"></div>
+            <button class="tool-btn" id="undo-btn" title="Undo (Ctrl+Z)"><span class="material-symbols-outlined">undo</span></button>
+            <button class="tool-btn" id="redo-btn" title="Redo (Ctrl+Y)"><span class="material-symbols-outlined">redo</span></button>
+            <div class="divider"></div>
+            <button class="tool-btn" data-tool="copy" title="Copy to Clipboard"><span class="material-symbols-outlined">content_copy</span></button>
+            <button class="tool-btn" data-tool="save" title="Save"><span class="material-symbols-outlined">save</span></button>
+        </div>
+        <div class="canvas-container">
+            <div id="drop-zone">
+                <div class="drop-zone-content">
+                    <button class="import-btn-large" id="import-btn">
+                        <span class="material-symbols-outlined">upload_file</span>
+                        <span>Import Image</span>
+                    </button>
+                    <p>Or drag & drop an image here, or paste from clipboard (Ctrl+V)</p>
+                </div>
+            </div>
+            <canvas id="canvas"></canvas>
+            <canvas id="drawing-canvas"></canvas>
+            <div id="resolution-display" style="display: none;"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
